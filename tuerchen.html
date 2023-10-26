@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css"> 
+    <title>Türchen</title>
+</head>
+<body>
+
+    <!-- Back arrow -->
+    <a href="./" class="backArrow">←</a>
+
+    <h1 id="headline"> Türchen n </h1>
+    
+    <div class="tuerchenContent">
+     
+    </div>
+
+    <script>
+
+        var tuerchenContent = document.getElementsByClassName("tuerchenContent")[0];
+        var headline = document.getElementById("headline");
+        var tuerchen = window.location.search.split("=")[1];
+        headline.innerHTML = "Türchen " + tuerchen;
+
+        fetch("contents/" + tuerchen + ".html")
+            .then(response => response.text())
+            .then(data => {
+                tuerchenContent.innerHTML = data;
+            });
+     
+
+    </script>
+
+</body>
+
+
+
+
+
+</html>
