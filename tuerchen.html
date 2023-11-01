@@ -24,11 +24,29 @@
         var tuerchen = window.location.search.split("=")[1];
         headline.innerHTML = "Türchen " + tuerchen;
 
+        function setInnerHTML(elm, html) {
+            elm.innerHTML = html;
+            
+            Array.from(elm.querySelectorAll("script"))
+              .forEach( oldScriptEl => {
+                const newScriptEl = document.createElement("script");
+                
+                Array.from(oldScriptEl.attributes).forEach( attr => {
+                  newScriptEl.setAttribute(attr.name, attr.value) 
+                });
+                
+                const scriptText = document.createTextNode(oldScriptEl.innerHTML);
+                newScriptEl.appendChild(scriptText);
+                
+                oldScriptEl.parentNode.replaceChild(newScriptEl, oldScriptEl);
+            });
+          }
+
         fetch("contents/" + tuerchen + ".html")
             .then(response => response.text())
             .then(data => {
-                tuerchenContent.innerHTML = data;
-            });
+                setInnerHTML(tuerchenContent, data);
+        });
      
 
     </script>
