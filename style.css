@@ -74,3 +74,6 @@ li {
     color: #fff;
 }
 
+input[type="checkbox"] {
+    float: left;
+}
